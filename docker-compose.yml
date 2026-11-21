@@ -1,0 +1,42 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: lyftr_backend
+    ports:
+      - "8000:8000"
+    environment:
+      - LLM_API_KEYS=${LLM_API_KEYS:-mock_key_1,mock_key_2}
+      - LLM_MODEL=${LLM_MODEL:-gemini/gemini-2.0-flash}
+      - DATABASE_URL=sqlite:////data/app.db
+      - ALLOWED_ORIGINS=${ALLOWED_ORIGINS:-http://localhost:3000,http://localhost:5173}
+      - ENABLE_FAILURE_SIMULATION=${ENABLE_FAILURE_SIMULATION:-true}
+      - LITELLM_LOCAL_MODEL_COST_MAP=true
+    volumes:
+      - sqlite_data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        - VITE_API_BASE_URL=${VITE_API_BASE_URL:-http://localhost:8000}
+    container_name: lyftr_frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  sqlite_data:
+    name: lyftr_sqlite_data
