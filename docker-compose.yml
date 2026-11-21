@@ -40,3 +40,4 @@ services:
 volumes:
   sqlite_data:
     name: lyftr_sqlite_data
+

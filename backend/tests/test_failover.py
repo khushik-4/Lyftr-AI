@@ -169,3 +169,4 @@ def test_simulate_failure_disabled(mock_completion, client):
         assert response.json()["metadata"]["fallback_attempts"] == 0
     finally:
         settings.ENABLE_FAILURE_SIMULATION = True
+

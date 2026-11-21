@@ -59,3 +59,4 @@ class StoredMessage(BaseModel):
 class SessionMessagesResponse(BaseModel):
     session_id: str
     messages: List[StoredMessage]
+

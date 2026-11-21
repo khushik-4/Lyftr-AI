@@ -384,3 +384,4 @@ backend/tests/test_history.py::test_unknown_session_returns_404 PASSED   [100%]
 
 ======================= 17 passed in 0.23s =======================
 ```
+

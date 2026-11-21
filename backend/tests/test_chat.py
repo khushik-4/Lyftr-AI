@@ -48,3 +48,4 @@ def test_valid_chat_success(mock_completion, client):
     assert metadata["key_id"] == "key_1"
     assert metadata["fallback_attempts"] == 0
     assert isinstance(metadata["latency_ms"], int)
+

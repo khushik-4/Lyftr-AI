@@ -88,3 +88,4 @@ def test_unknown_session_returns_404(client):
     response = client.get("/sessions/non_existent_session_999/messages")
     assert response.status_code == 404
     assert response.json()["detail"] == "session not found"
+

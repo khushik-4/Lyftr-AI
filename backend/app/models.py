@@ -17,3 +17,4 @@ class Message(Base):
     __table_args__ = (
         Index("ix_messages_session_created", "session_id", "created_at"),
     )
+

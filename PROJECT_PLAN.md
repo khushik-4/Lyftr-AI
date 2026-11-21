@@ -60,3 +60,4 @@ Lyftr AI is a production-grade, lightweight AI chatbot application built with Fa
 - `backend/tests`: Pytest suite testing health, validation, multi-turn, caching, failover, and history.
 - `frontend/src`: React application components, hooks, API services, and styles conforming to data-testid requirements.
 - `docker-compose.yml`, `Makefile`, `.env.example`, `README.md`.
+

@@ -1,7 +1,9 @@
 import time
+import logging
 import re
 from typing import List, Dict, Any, Optional, Tuple
 import litellm
+logger = logging.getLogger(__name__)
 from litellm.exceptions import (
     RateLimitError,
     BudgetExceededError,
@@ -188,16 +190,20 @@ class LLMService:
 
             except Exception as e:
                 last_exception = e
-                if self._is_retryable_error(e):
-                    fallback_attempts += 1
-                    continue
-                else:
-                    # Non-retryable error, check next key as well or break
-                    fallback_attempts += 1
-                    continue
+
+                logger.warning(
+                    "Provider attempt failed | key_id=%s | error_type=%s | error=%s",
+                    key_id,
+                    type(e).__name__,
+                    str(e)[:500]
+                )
+
+                fallback_attempts += 1
+                continue
 
         # If all keys exhausted
         raise AllProvidersUnavailableException("all providers unavailable")
 
 
 llm_service = LLMService()
+

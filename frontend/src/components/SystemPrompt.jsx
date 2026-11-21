@@ -18,3 +18,4 @@ export default function SystemPrompt({ isOpen, systemPrompt, onSystemPromptChang
     </div>
   );
 }
+

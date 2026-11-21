@@ -48,3 +48,4 @@ def test_caching_behavior(mock_completion, client):
 
     # litellm.completion must NOT have been called a second time
     assert mock_completion.call_count == 1
+

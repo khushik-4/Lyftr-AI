@@ -63,3 +63,4 @@ export default function ChatInput({ onSendMessage, disabled }) {
     </div>
   );
 }
+
